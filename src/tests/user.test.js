@@ -6,13 +6,13 @@ let TOKEN
 let userId
 
 beforeAll(async () => {
-  const user = {
+  const hits = {
     email: 'juan@gmail.com',
     password: 'juan123'
   }
   const res = await request(app)
     .post(`${BASE_URL}/login`)
-    .send(user)
+    .send(hits)
   
     TOKEN = res.body.token
     // console.log(TOKEN)
