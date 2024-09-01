@@ -2,7 +2,7 @@ require('../models')
 const request = require('supertest')
 const app = require('../app')
 const Product = require('../models/Product')
-const Category = require('../models/Category')
+// const Category = require('../models/Category')
 
 const BASE_URL = '/api/v1/cart'
 const BASE_URL_LOGIN = '/api/v1/users/login'
@@ -27,13 +27,13 @@ beforeAll(async () => {
   TOKEN = res.body.token
   userId = res.body.user.id
 
-  category = await Category.create({ name: 'Buzos' })
+  // category = await Category.create({ name: 'Buzos' })
 
   productBody = {
     title: "Adidas B1",
     description: "B1 is ...",
     price: 149.90,
-    categoryId: category.id
+    // categoryId: category.id
   }
 
   product = await Product.create(productBody)
@@ -45,9 +45,9 @@ beforeAll(async () => {
 
 })
 
-afterAll(async () => {
-  await category.destroy()
-})
+// afterAll(async () => {
+//   await category.destroy()
+// })
 
 test("POST -> 'BASE_URL', should return status code 201 and res.body.quantity === cart.quantity", async () => {
 
@@ -83,7 +83,6 @@ test("GET -> 'BASE_URL',should return status code 200 and res.body.length === 1"
 
   // expect(res.body[0].product.productImgs).toBeDefined()
   // expect(res.body[0].product.productImgs).toHaveLength(0)
-
 })
 
 test("GET -> 'BASE_URL/:id',should return status code 200 and res.body.quantity === cart.quantity", async () => {
@@ -102,10 +101,8 @@ test("GET -> 'BASE_URL/:id',should return status code 200 and res.body.quantity 
   expect(res.body.productId).toBe(product.id)
   expect(res.body.product.id).toBe(product.id)
 
-
   // expect(res.body[0].product.productImgs).toBeDefined()
   // expect(res.body[0].product.productImgs).toHaveLength(0)
-
 })
 
 test("PUT -> 'BASE_URL/:id',should return status code 200 and res.body.quantity === cartUpdate.quantity", async () => {
@@ -121,7 +118,6 @@ test("PUT -> 'BASE_URL/:id',should return status code 200 and res.body.quantity 
   expect(res.status).toBe(200)
   expect(res.body).toBeDefined()
   expect(res.body.quantity).toBe(cartUpdate.quantity)
-
 })
 
 
